@@ -1,0 +1,28 @@
+VERSION="7u51"
+
+JDK_URL="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html"
+
+FILES=(
+  "jdk-${VERSION}-linux-x64.tar.gz"
+)
+
+MD5=(
+  "764f96c4b078b80adaa5983e75470ff2"
+)
+
+SHA1=(
+  "bee3b085a90439c833ce18e138c9f1a615152891"
+)
+
+fetch() {
+  env_fail "Because of the Oracle License Agreement it is not possible to download"
+  env_fail "the archiv automatically. Please download the file manually from"
+  env_fail "${JDK_URL}"
+  env_fail "and place it into the following directory:"
+  env_fail "${DISTDIR}"
+  return 1
+}
+
+unpack() {
+  env_try "tar -xzf ${ARCHIVE}" || return 1
+}
