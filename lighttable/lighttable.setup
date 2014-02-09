@@ -1,0 +1,28 @@
+#!/bin/bash
+VERSION="0.6.2"
+
+JDK_URL="http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html"
+
+FILES=(
+  "http://d35ac8ww5dfjyg.cloudfront.net/playground/bins/${VERSION}/LightTableLinux64.tar.gz"
+)
+
+MD5=(
+  "e4316483b0beebfa3c9d06a357d777c6"
+)
+
+SHA1=(
+  "546e4bef741838b91f336453953442652579398c"
+)
+
+unpack() {
+  env_try "tar -xzf ${ARCHIVE}" || return 1
+}
+
+setup() {
+  mkdir -p ${DESTDIR}/usr/local/
+  env_try "cp -a LightTable ${DESTDIR}/usr/local" || return 1
+  mkdir -p ${DESTDIR}/usr/bin
+  cd ${DESTDIR}/usr/bin
+  ln -s ../local/LightTable/LightTable LightTable
+}
